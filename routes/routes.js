@@ -7,4 +7,8 @@ router.get('/',controllers.home)
 
 router.get('/about',controllers.about)
 
+router.get('/blog',controllers.blog)
+
+router.get('/login',controllers.login)
+
 module.exports=router
