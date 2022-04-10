@@ -11,6 +11,13 @@ app.engine('handlebars',exphbs.engine({defaultLayout:'main'}))
 //setting up public directory
 app.use(express.static('public'))
 
+//bodyParser config
+const bodyParser=require('body-parser')
+app.use(bodyParser.urlencoded({extended:true}))
+
+//database connection
+require('./database/connection')
+
 // routes here 
 app.use(routes)
 
