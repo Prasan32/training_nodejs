@@ -26,10 +26,14 @@ router.get('/login',controllers.login)
 
 router.get('/register',controllers.register)
 
-router.get('/postDetail',controllers.postDetail)
+router.get('/postDetail/:id',controllers.postDetail)
 
 router.get('/createPost',controllers.createPost)
 
 router.post('/createPost',upload.single('image'),controllers.savePost)
+
+router.get('/edit/:id',controllers.edit)
+
+router.get('/delete/:id',controllers.delete)
 
 module.exports=router

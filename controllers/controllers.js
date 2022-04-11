@@ -1,19 +1,26 @@
 const con=require('../database/connection')
 
 exports.home=(req,res)=>{
-    res.render('home')
+    res.render('home',{title:'HOME'})
 }
 
 exports.about=(req,res)=>{
-    res.render('about')
+    res.render('about',{title:'ABOUT'})
 }
 
 exports.blog=(req,res)=>{
     //using connection object to fetch the data from the post table
     con.query('SELECT * FROM post',(error,results)=>{
-        console.log(results);
         if(error) throw error
-        res.render('blog',{results:results})
+        results.map(post=>{
+           post.description=post.description.substring(0,200)+'...'
+           let date=new Date(post.created_at)
+           let year=date.getFullYear()
+           let month=date.getMonth()
+           let day=date.getDate()
+           post.created_at=year+'-'+(month+1)+'-'+day 
+        })
+        res.render('blog',{results:results,title:'BLOG'})
     })
 
     
@@ -28,11 +35,21 @@ exports.register=(req,res)=>{
 }
 
 exports.postDetail=(req,res)=>{
-    res.render('postDetail')
+    let id=req.params.id
+    con.query('SELECT * FROM post WHERE id=?',id,(error,result)=>{
+        if(error) throw error
+        let date=new Date(result[0].created_at)
+        let year=date.getFullYear()
+        let month=date.getMonth()
+        let day=date.getDate() 
+        result[0].created_at=year+'-'+(month+1)+'-'+day 
+        res.render('postDetail',{post:result[0]})
+    })
+   
 }
 
 exports.createPost=(req,res)=>{
-    res.render('createPost')
+    res.render('createPost',{title:"NEW POST"})
 }
 
 exports.savePost=(req,res)=>{
@@ -55,4 +72,12 @@ exports.savePost=(req,res)=>{
         }
         res.redirect('/blog')
     })
+}
+
+exports.edit=(req,res)=>{
+
+}
+
+exports.delete=(req,res)=>{
+    
 }
