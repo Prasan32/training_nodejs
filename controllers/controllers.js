@@ -35,21 +35,11 @@ exports.register=(req,res)=>{
 }
 
 exports.postDetail=(req,res)=>{
-    let id=req.params.id
-    con.query('SELECT * FROM post WHERE id=?',id,(error,result)=>{
-        if(error) throw error
-        let date=new Date(result[0].created_at)
-        let year=date.getFullYear()
-        let month=date.getMonth()
-        let day=date.getDate() 
-        result[0].created_at=year+'-'+(month+1)+'-'+day 
-        res.render('postDetail',{post:result[0]})
-    })
-   
+    res.render('postDetail')
 }
 
 exports.createPost=(req,res)=>{
-    res.render('createPost',{title:"NEW POST"})
+    res.render('createPost')
 }
 
 exports.savePost=(req,res)=>{
@@ -72,12 +62,4 @@ exports.savePost=(req,res)=>{
         }
         res.redirect('/blog')
     })
-}
-
-exports.edit=(req,res)=>{
-
-}
-
-exports.delete=(req,res)=>{
-    
 }
