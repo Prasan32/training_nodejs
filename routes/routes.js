@@ -36,4 +36,6 @@ router.get('/edit/:id',controllers.edit)
 
 router.get('/delete/:id',controllers.delete)
 
+router.post('/edit/:id',upload.single('image'),controllers.update)
+
 module.exports=router
