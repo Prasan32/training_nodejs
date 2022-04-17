@@ -1,4 +1,10 @@
 <div class="container mt-3">
+    {{#if success_message}}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{success_message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
     <div class="d-flex justify-content-between">
         <div><a href="/createPost"><button class="btn btn-warning mb-3">Create Post</button></a></div>
     </div>
@@ -13,7 +19,7 @@
                 <h5 class="mt-2">{{title}}</h5>
                 <small class="text-muted">{{created_at}},{{author}}</small>
                 <p>
-                  {{description}}
+                    {{description}}
                 </p>
                 <button class="btn btn-primary">
                     <a href="/postDetail/{{id}}" style="text-decoration: none;color:white">Read More</a>

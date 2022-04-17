@@ -67,6 +67,7 @@ exports.savePost = (req, res) => {
       con.rollback();
       throw error;
     }
+    req.flash('success_message','Post created successfully!!!')
     res.redirect("/blog");
   });
 };
